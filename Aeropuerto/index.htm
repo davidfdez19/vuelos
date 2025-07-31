@@ -1,147 +1,68 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Vuelos del Aeropuerto</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="https://static.vecteezy.com/system/resources/thumbnails/037/277/866/small_2x/flying-airplane-isolated-on-background-3d-rendering-illustration-free-png.png">
-    <!-- Añadido para los iconos (opcional pero recomendado) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestor de Vuelos (Versión Final Corregida)</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E✈️%3C/text%3E%3C/svg%3E">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="./style.css">
 </head>
+<a href=""></a>
 <body>
-    <header>
-        <h1>Aeropuerto Seve Ballesteros - Santander</h1>
-        <a href="./inicio/inicio.htm" class="btn-inicio">
+  <a href="./inicio/inicio.htm" class="btn-inicio">
             <i class="fas fa-home"></i> <!-- Icono opcional -->
             Página de Inicio
         </a>
-    </header>
 
-    <main>
-        <section id="gestionVuelos">
-            <h2>Gestión de Vuelos</h2>
-            <form id="formVuelo" onsubmit="return false;"> <!-- onsubmit para prevenir recarga de página -->
-                <div class="form-grid">
-                    <div>
-                        <label for="codigoVuelo">Código de Vuelo:</label>
-                        <input type="text" id="codigoVuelo" placeholder="Ej: IBE1234">
-                        <small>Formato: 3 letras de compañía + 4 números.</small>
-                    </div>
-                    <div>
-                        <label for="compania">Compañía:</label>
-                        <input type="text" id="compania" placeholder="Ej: Iberia">
-                    </div>
-                    <div>
-                        <label for="fechaSalida">Fecha de Salida:</label>
-                        <input type="date" id="fechaSalida">
-                    </div>
-                    <div>
-                        <label for="horaSalida">Hora de Salida:</label>
-                        <input type="time" id="horaSalida">
-                    </div>
-                    <div>
-                        <label for="fechaLlegada">Fecha de Llegada:</label>
-                        <input type="date" id="fechaLlegada">
-                    </div>
-                    <div>
-                        <label for="horaLlegada">Hora de Llegada:</label>
-                        <input type="time" id="horaLlegada">
-                    </div>
-                    <div>
-                        <label for="precioBase">Precio Base (€):</label>
-                        <input type="number" id="precioBase" min="0" step="0.01" placeholder="Ej: 150.50">
-                    </div>
-                </div>
-                <div id="errorFormVuelo" class="error-container"></div>
-                <div class="botones-principales">
-                    <button type="button" id="btnGuardar">Guardar Vuelo</button>
-                    <button type="button" id="btnMostrarVuelos">Mostrar Vuelos</button>
-                    <button type="button" id="btnFiltrarEspecifico">Filtrar por Compañía/Llegada</button>
-                </div>
-            </form>
-        </section>
-
-        <section id="listadoVuelos">
-            <h2>Listado de Vuelos</h2>
-            <div id="outputVuelos">
-                <p>Utiliza el formulario para añadir o filtrar vuelos.</p>
-                <table id="tablaVuelos">
-                    <thead>
-                        <tr>
-                            <th>Código</th>
-                            <th>Compañía</th>
-                            <th>Salida</th>
-                            <th>Llegada</th>
-                            <th>Duración</th>
-                            <th>Precio Base</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tablaVuelosBody">
-                        <!-- Las filas de los vuelos se insertarán aquí con JavaScript -->
-                    </tbody>
-                </table>
+    <main class="container">
+        <!-- <header class="main-header"><h1>Gestor de Vuelos</h1></header> -->
+        <div id="main-content">
+            <div class="content-card">
+                <div class="form-group"><label for="airport-select">Seleccione un Aeropuerto de Origen</label><select id="airport-select"></select></div>
             </div>
-        </section>
+            <section id="flight-management-section" class="content-card hidden">
+                <h2 id="airport-name-title"></h2>
+                <form id="add-flight-form" novalidate>
+                    
+                    <div class="form-grid">
+                        <div class="form-group"><label for="flight-number">Número</label><input type="text" id="flight-number" required></div>
+                        <div class="form-group"><label for="company-input">Compañía</label><input type="text" id="company-input" required></div>
+                    </div>
+                    <div class="form-group"><label for="destination">Destino</label><input type="text" id="destination" required></div>
+                    <div class="form-grid">
+                        <div class="form-group"><label for="departure-date">Día Salida</label><input type="date" id="departure-date" required></div>
+                        <div class="form-group"><label for="departure-time">Hora Salida</label><input type="time" id="departure-time" required></div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group"><label for="arrival-date">Día Llegada</label><input type="date" id="arrival-date" required></div>
+                        <div class="form-group"><label for="arrival-time">Hora Llegada</label><input type="time" id="arrival-time" required></div>
+                    </div>
+                    <button type="submit" class="cta-button"><i class="fas fa-paper-plane"></i>Añadir Vuelo</button>
+                </form>
+                <section id="flight-list-section">
+                    <h3>Vuelos Programados</h3>
+                    <!-- SECCIÓN DE FILTROS RESTAURADA -->
+                    <fieldset class="filter-fieldset">
+                        <legend>Filtrar Vuelos</legend>
+                        <div class="form-grid">
+                            <div class="form-group"><label for="filter-destination">Destino</label><input type="text" id="filter-destination"></div>
+                            <div class="form-group"><label for="filter-arrival-time">Hora Llegada</label><input type="time" id="filter-arrival-time"></div>
+                            <div class="form-group"><label for="filter-company">Compañía</label><input type="text" id="filter-company"></div>
+                        </div>
+                    </fieldset>
+                    <div class="list-actions-container">
+                        <!-- BOTÓN DE FILTRAR RESTAURADO Y FUNCIONAL -->
+                        <button type="button" id="filter-flights-btn" class="cta-button"><i class="fas fa-search"></i> Filtrar</button>
+                        <button type="button" id="show-flights-btn" class="secondary-button"></button>
+                    </div>
+                    <ul id="flight-list"></ul>
+                    <p id="no-flights-message" class="hidden">No hay vuelos que mostrar</p>
+                </section>
+            </section>
+        </div>
     </main>
 
-    <!-- Overlay para el formulario de compra -->
-    <div id="compraOverlay" class="hidden">
-        <div id="formularioCompra">
-            <h3>Formulario de Reserva</h3>
-            <p>Estás comprando un pasaje para el vuelo: <strong id="codigoVueloCompra"></strong></p>
-            <form id="formCliente" onsubmit="return false;">
-                <div>
-                    <label for="dniCliente">DNI:</label>
-                    <input type="text" id="dniCliente" placeholder="12345678A" required>
-                </div>
-                <div>
-                    <label for="nombreCliente">Nombre y Apellidos:</label>
-                    <input type="text" id="nombreCliente" placeholder="Juan Pérez" required>
-                </div>
-                <div>
-                    <label for="emailCliente">Correo Electrónico:</label>
-                    <input type="email" id="emailCliente" placeholder="juan.perez@email.com" required>
-                </div>
-                <div>
-                    <label for="claseVuelo">Clase:</label>
-                    <select id="claseVuelo">
-                        <option value="1">Turista</option>
-                        <option value="1.5">Turista Premium (+50%)</option>
-                        <option value="2">Business (x2)</option>
-                        <option value="3">Primera Clase (x3)</option>
-                    </select>
-                </div>
-                <fieldset>
-                    <legend>Método de Pago:</legend>
-                    <input type="radio" id="pagoEfectivo" name="metodoPago" value="Efectivo" checked>
-                    <label for="pagoEfectivo">Efectivo</label>
-                    <input type="radio" id="pagoCredito" name="metodoPago" value="Tarjeta">
-                    <label for="pagoCredito">Tarjeta</label>
-                    <input type="radio" id="pagoDebito" name="metodoPago" value="Bizum">
-                    <label for="pagoDebito">Bizum</label>
-                     <input type="radio" id="pagoPaypal" name="metodoPago" value="Paypal">
-                    <label for="pagoPaypal">Paypal</label>
-                </fieldset>
-                <div>
-                    <label for="comentarioCliente">Comentario (Opcional):</label>
-                    <textarea id="comentarioCliente" rows="3" maxlength="120" placeholder="Alergias, preferencia de asiento, etc."></textarea>
-                    <small id="contadorChars">120 caracteres restantes</small>
-                </div>
-                <div id="errorFormCompra" class="error-container"></div>
-                <div class="botones-compra">
-                    <button type="button" id="btnReservar">Confirmar Reserva</button>
-                    <button type="button" id="btnCancelarCompra">Cancelar</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <footer>
-        <p>© 2025 - Gestión de Vuelos y Compras</p>
-    </footer>
-
-    <script src="script.js"></script>
+    <script src="./script.js"></script>
 </body>
 </html>
