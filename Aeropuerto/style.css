@@ -8,7 +8,6 @@
 }
 
 body {
-    background-image: url(https://www.shutterstock.com/image-vector/airport-airplane-on-runway-vector-600nw-2521665201.jpg);
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     line-height: 1.6;
     margin: 0;
@@ -49,21 +48,27 @@ h1 {
 .btn-inicio {
     background-color: var(--secondary-color);
     color: var(--dark-gray);
-    padding: 10px 20px;
+    padding: 6px 12px; /* Más pequeño que antes */
     border-radius: 5px;
-    text-decoration: none; /* Quita el subrayado de los enlaces */
+    text-decoration: none;
     font-weight: bold;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    display: flex; /* Para alinear el icono y el texto */
+    display: flex;
     align-items: center;
-    gap: 8px; /* Espacio entre icono y texto */
+    gap: 6px;
+    font-size: 0.85rem; /* Texto un poco más pequeño */
+    
+    position: fixed; /* Para que se quede fija */
+    top: 10px;       /* A 10px desde arriba */
+    right: 10px;     /* A 10px desde la derecha */
+    cursor: pointer;
+    z-index: 1000;   /* Para que quede por encima de otros elementos */
 }
 
 .btn-inicio:hover {
-    background-color: #dca00f; /* Un amarillo más oscuro al pasar el ratón */
-    transform: scale(1.05); /* Efecto de crecimiento sutil */
+    background-color: #dca00f;
+    transform: scale(1.05);
 }
-/* ----- FIN DEL CÓDIGO NUEVO ----- */
 
 
 main {
