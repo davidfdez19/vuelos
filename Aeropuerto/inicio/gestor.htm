@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestor de Vuelos (Versión Final Corregida)</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E✈️%3C/text%3E%3C/svg%3E">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="../style.css">
+</head>
+<a href=""></a>
+<body>
+  <a href="./inicio/inicio.htm" class="btn-inicio">
+            <i class="fas fa-home"></i> <!-- Icono opcional -->
+            Página de Inicio
+        </a>
+
+    <main class="container">
+        <!-- <header class="main-header"><h1>Gestor de Vuelos</h1></header> -->
+        <div id="main-content">
+            <div class="content-card">
+                <div class="form-group"><label for="airport-select">Seleccione un Aeropuerto de Origen</label><select id="airport-select"></select></div>
+            </div>
+            <section id="flight-management-section" class="content-card hidden">
+                <h2 id="airport-name-title"></h2>
+                <form id="add-flight-form" novalidate>
+                    
+                    <div class="form-grid">
+                        <div class="form-group"><label for="flight-number">Número</label><input type="text" id="flight-number" required></div>
+                        <div class="form-group"><label for="company-input">Compañía</label><input type="text" id="company-input" required></div>
+                    </div>
+                    <div class="form-group"><label for="destination">Destino</label><input type="text" id="destination" required></div>
+                    <div class="form-grid">
+                        <div class="form-group"><label for="departure-date">Día Salida</label><input type="date" id="departure-date" required></div>
+                        <div class="form-group"><label for="departure-time">Hora Salida</label><input type="time" id="departure-time" required></div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group"><label for="arrival-date">Día Llegada</label><input type="date" id="arrival-date" required></div>
+                        <div class="form-group"><label for="arrival-time">Hora Llegada</label><input type="time" id="arrival-time" required></div>
+                    </div>
+                    <button type="submit" class="cta-button"><i class="fas fa-paper-plane"></i>Añadir Vuelo</button>
+                </form>
+                <section id="flight-list-section">
+                    <h3>Vuelos Programados</h3>
+                    <!-- SECCIÓN DE FILTROS RESTAURADA -->
+                    <fieldset class="filter-fieldset">
+                        <legend>Filtrar Vuelos</legend>
+                        <div class="form-grid">
+                            <div class="form-group"><label for="filter-destination">Destino</label><input type="text" id="filter-destination"></div>
+                            <div class="form-group"><label for="filter-arrival-time">Hora Llegada</label><input type="time" id="filter-arrival-time"></div>
+                            <div class="form-group"><label for="filter-company">Compañía</label><input type="text" id="filter-company"></div>
+                        </div>
+                    </fieldset>
+                    <div class="list-actions-container">
+                        <!-- BOTÓN DE FILTRAR RESTAURADO Y FUNCIONAL -->
+                        <button type="button" id="filter-flights-btn" class="cta-button"><i class="fas fa-search"></i> Filtrar</button>
+                        <button type="button" id="show-flights-btn" class="secondary-button"></button>
+                    </div>
+                    <ul id="flight-list"></ul>
+                    <p id="no-flights-message" class="hidden">No hay vuelos que mostrar</p>
+                </section>
+            </section>
+        </div>
+    </main>
+
+    <script src="../script.js"></script>
+</body>
+</html>
