@@ -12,7 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const airportsData = {
         "Asturias": "Aeropuerto de Asturias",
         "Barcelona": "Aeropuerto de Barcelona",
-        "Madrid": "Aeropuerto de Madrid"
+        "Madrid": "Aeropuerto de Madrid",
+        "Santander": "Aeropuerto de Santander"
     };
 
     const state = {
@@ -89,12 +90,14 @@ document.addEventListener('DOMContentLoaded', () => {
             depDate: document.getElementById('departure-date').value,
             depTime: document.getElementById('departure-time').value,
             arrDate: document.getElementById('arrival-date').value,
-            arrTime: document.getElementById('arrival-time').value
+            arrTime: document.getElementById('arrival-time').value,
+            price: document.getElementById('flight-price').value // CAMBIO: Añadido el precio
         };
 
+        // CAMBIO: Se comprueba también el campo de precio
         if (!newFlight.number || !newFlight.company || !newFlight.destination ||
-            !newFlight.depDate || !newFlight.depTime || !newFlight.arrDate || !newFlight.arrTime) {
-            return alert("Rellene todos los campos.");
+            !newFlight.depDate || !newFlight.depTime || !newFlight.arrDate || !newFlight.arrTime || !newFlight.price) {
+            return alert("Rellene todos los campos, incluido el precio.");
         }
 
         if (calculateFlightDuration(newFlight.depDate, newFlight.depTime, newFlight.arrDate, newFlight.arrTime) === "Error") {
@@ -137,6 +140,8 @@ document.addEventListener('DOMContentLoaded', () => {
             li.className = 'flight-card';
 
             const duration = calculateFlightDuration(flight.depDate, flight.depTime, flight.arrDate, flight.arrTime);
+            
+            // CAMBIO: Se añade el precio a la tarjeta del vuelo
             li.innerHTML = `
                 <div>
                     <h4>Vuelo ${flight.number.toUpperCase()} (${flight.company})</h4>
@@ -150,6 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                 </div>
                 <div class="flight-actions">
+                    <div class="flight-price">${flight.price} €</div>
                     <button class="buy-button"><i class="fas fa-ticket-alt"></i> Comprar</button>
                 </div>`;
 
@@ -231,11 +237,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function createPurchaseFormHTML() {
         const flight = state.currentFlightForPurchase;
+        // CAMBIO: Se añade el precio al modal de compra
         return `
             <div class="modal-content">
                 <button class="close-button" title="Cerrar">CANCELAR ❌</button>
                 <h2><i class="fas fa-shopping-cart"></i> Confirmar Compra</h2>
                 <p><strong>Vuelo:</strong> ${flight.number} a ${flight.destination}</p>
+                <p><strong>Precio:</strong> ${flight.price} €</p>
                 <form id="ticket-form" novalidate>
                     <div class="form-group">
                         <label for="passenger-name">Nombre Completo</label>
@@ -289,6 +297,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const dateStr = (date) => `${date.getFullYear()}-${pad(date.getMonth()+1)}-${pad(date.getDate())}`;
 
+        // CAMBIO: Se añade la propiedad "price" a los vuelos de ejemplo
         state.sampleFlights = [
             {
                 id: 1,
@@ -298,7 +307,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 depDate: dateStr(today),
                 depTime: "09:30",
                 arrDate: dateStr(today),
-                arrTime: "11:15"
+                arrTime: "11:15",
+                price: 125
             },
             {
                 id: 2,
@@ -308,17 +318,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 depDate: dateStr(today),
                 depTime: "13:00",
                 arrDate: dateStr(today),
-                arrTime: "15:10"
+                arrTime: "15:10",
+                price: 180
             },
             {
                 id: 3,
                 number: "VY4321",
                 company: "Vueling",
-                destination: "Roma",
+                destination: "Ibiza",
                 depDate: dateStr(today),
                 depTime: "17:45",
                 arrDate: dateStr(today),
-                arrTime: "19:30"
+                arrTime: "19:30",
+                price: 95
             }
         ];
     }
